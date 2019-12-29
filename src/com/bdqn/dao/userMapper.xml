@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bdqn.dao.userMapper">
+<resultMap type="com.bdqn.entity.DY_User" id="userMap">
+<result property="uId" column="uId"/>
+<result property="uName" column="uName"/>
+<result property="uPwd" column="uPwd"/>
+<result property="uGender" column="uGender"/>
+<result property="uEmail" column="uemail"/>
+<result property="uRole" column="urole"/>
+<result property="uHead" column="uhead"/>
+<result property="uRegdate" column="uregdate"/>
+<result property="uLastLogin" column="ulastlogin"/>
+<result property="uLastEMAIL" column="ulastemail"/>
+<result property="uPermit" column="upermit"/>
+<collection property="topic" ofType="com.bdqn.entity.DY_Topic">
+<result property="tId" column="tid"/>
+<result property="uId" column="uid"/>
+<result property="tgId" column="tgid"/>
+<result property="tTitle" column="tTitle"/>
+<result property="tContent" column="tcontent"/>
+<result property="tDate" column="tDate"/>
+<result property="tReadCount" column="tReadCount"/>
+</collection>
+<collection property="reverts" ofType="com.bdqn.entity.DY_Revert">
+<result property="rId" column="rId"/>
+<result property="tId" column="tId"/>
+<result property="uId" column="uId"/>
+<result property="rTitle" column="rTitle"/>
+<result property="rContent" column="rcontent"/>
+<result property="rDate" column="rDate"/>
+</collection>
+</resultMap>
+<select id="users" resultMap="userMap">
+SELECT * FROM DY_User,DY_Topic,DY_Revert WHERE DY_User.UID=DY_Topic.UID and DY_User.UID=DY_Revert.uid
+</select>
+</mapper>
